@@ -37,6 +37,7 @@ class NotesController{
         response.json();
     }
 
+    //mostrando as notas pelo id
     async show(request, response){
         const { id } = request.params;
 
@@ -50,6 +51,33 @@ class NotesController{
             links
         });
 
+    }
+
+    async delete(request, response){
+        const { id } = request.params;
+
+        await knex("notes").where({id}).delete();
+
+        return response.json();
+    }
+
+    //mostrar as notas
+    async index(request, response){
+        const{title, user_id, tags} = request.query;
+
+        let notes;
+
+        if(tags){
+            //tags.split(',') = converte esse texto em array utilizando como a delimitador a virgula
+            //map(tag =>tag.trim()) =pegar só a tag 
+            //O método trim() remove os espaços em branco (whitespaces) do início e/ou fim de um texto
+            const filterTags = tags.split(',').map(tag =>tag.trim()); 
+            console.log(filterTags)
+        }else{
+            notes = await knex("notes").where({user_id}).whereLike("title" , `%${title}%`).orderBy("title");
+        }
+
+        return response.json(notes);
     }
 }
 

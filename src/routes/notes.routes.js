@@ -9,9 +9,10 @@ const notesRoutes = Router();
 //instanciando na memória. Reservando um espaço em memoria para a class
 const notesController = new NotesController();
 
-
+notesRoutes.get("/", notesController.index);
 notesRoutes.post("/:user_id", notesController.create);
 notesRoutes.get("/:id", notesController.show);
+notesRoutes.delete("/:id", notesController.delete);
 
 
 //exportando para quem quiser utilizar esse arquivo
