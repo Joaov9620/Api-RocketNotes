@@ -11,7 +11,8 @@ const notesController = new NotesController();
 
 
 notesRoutes.post("/:user_id", notesController.create);
-   
+notesRoutes.get("/:id", notesController.show);
+
 
 //exportando para quem quiser utilizar esse arquivo
 module.exports = notesRoutes;
