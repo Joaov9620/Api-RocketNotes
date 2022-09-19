@@ -1,5 +1,5 @@
 //Importando o Router de dentro o express
-const {Router, response} = require("express");
+const {Router} = require("express");
 
 //Importando o controle
 const UserController = require("../controllers/UsersController");

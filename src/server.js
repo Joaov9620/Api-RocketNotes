@@ -4,7 +4,7 @@ require("express-async-errors");
 //importando o banco de dados
 const migrationsRun = require("./database/sqlite/migrations")
 
-//importando o Apperro
+//importando o AppErro
 const AppError= require("./utils/AppError");
 
 const express = require('express'); //importamos o express
