@@ -72,13 +72,22 @@ class NotesController{
             //map(tag =>tag.trim()) =pegar só a tag 
             //O método trim() remove os espaços em branco (whitespaces) do início e/ou fim de um texto
             const filterTags = tags.split(',').map(tag =>tag.trim()); 
-            console.log(filterTags)
+             
+          
+            notes = await knex("tags").select([
+                "notes.id",
+                "notes.title",
+                "notes.user_id"
+            ])
+            .where("note.user_id","=", user_id)
+            .whereIn("name", filterTags)   //analisa baseado na tag e passa o vetor que quer que compare se a tag existe
         }else{
             notes = await knex("notes").where({user_id}).whereLike("title" , `%${title}%`).orderBy("title");
         }
 
         return response.json(notes);
     }
+    //rever a aula Aplicando Inner Join pois não entendi foi nada
 }
 
 module.exports = NotesController;
