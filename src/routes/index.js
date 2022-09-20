@@ -4,6 +4,7 @@ const {Router} = require("express");    //Importando o Router de dentro o expres
 
 const usersRoutes = require("./users.routes")//importamos o user.routes
 const notesRoutes = require("./notes.routes")
+const tagsRoutes = require("./tags.routes")
 
 //o routes contem todas as rotas da nossa aplicação
 const routes = Router();
@@ -12,6 +13,7 @@ const routes = Router();
 routes.use("/users", usersRoutes)
 
 routes.use("/notes", notesRoutes)
+routes.use("/tags", tagsRoutes)
 
 //exportando routes
 module.exports = routes;
