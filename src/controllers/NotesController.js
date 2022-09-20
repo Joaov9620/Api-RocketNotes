@@ -61,7 +61,7 @@ class NotesController{
         return response.json();
     }
 
-    //mostrar as notas
+    //mostrar as notas    REVER ESSE CÓDIO TODO PARA ENTENDER MELHOR
     async index(request, response){
         const{title, user_id, tags} = request.query;
 
@@ -84,7 +84,7 @@ class NotesController{
             .whereLike("notes.title", `%${title}%`)
             .whereIn("name", filterTags)   //analisa baseado na tag e passa o vetor que quer que compare se a tag existe
             .innerJoin("notes","notes.id","tags.note_id")
-            .orderBy("notes.title")
+            .orderBy("notes.title");
         }else{
             notes = await knex("notes")
             .where({user_id})
@@ -92,7 +92,21 @@ class NotesController{
             .orderBy("title");
         }
 
-        return response.json(notes);
+       //Obtendo tags da nota
+        const userTags = await knex("tags").where({ user_id })  //Obtendo tags onde onde a tag seja igual ao id do usuário
+
+        const notesWithTags = notes.map(note =>{
+           
+            //filtrar tags da nota
+            const noteTags = userTags.filter(tag => tag.note_id === note.id);
+
+            return{
+                ...note,
+                tags: noteTags
+            }
+        })
+
+        return response.json(notesWithTags);
     }
 }
 
