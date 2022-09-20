@@ -80,10 +80,10 @@ class NotesController{
                 "notes.title",
                 "notes.user_id",
             ])
-            .where("note.user_id","=", user_id) //filtrar baseado no id do usuário
+            .where("notes.user_id", user_id) //filtrar baseado no id do usuário
             .whereLike("notes.title", `%${title}%`)
             .whereIn("name", filterTags)   //analisa baseado na tag e passa o vetor que quer que compare se a tag existe
-            .innerJoin("notes","notes.id","tags.notes_id")
+            .innerJoin("notes","notes.id","tags.note_id")
             .orderBy("notes.title")
         }else{
             notes = await knex("notes")
