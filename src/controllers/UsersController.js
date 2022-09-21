@@ -48,12 +48,11 @@ class UserController{
         const database = await sqliteConnection();
 
         const user = await database.get("SELECT * FROM users WHERE id = (?)", [id]); //pegando o usuário pelo id
-        
         //se o usuário não for encontrado
         if(!user){
             throw new AppError("Usuário não encontrado")
         }
-
+        console.log(request.body)
         //se email já existe
         const userWithUpdatedEmail =  await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
@@ -64,6 +63,8 @@ class UserController{
 
         user.name = name ?? user.name;  //se não existir conteúdo no name então deixe o mesmo nome de antes, para evitar que o valor seja nulo
         user.email = email ?? user.email;
+
+        console.log(name, email)
 
         if(password && !old_password){
             throw new AppError("Você precisa informar a senha antiga para definir a nova senha");
