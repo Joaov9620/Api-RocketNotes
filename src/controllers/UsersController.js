@@ -52,6 +52,7 @@ class UserController{
         if(!user){
             throw new AppError("Usuário não encontrado")
         }
+     
         //se email já existe
         const userWithUpdatedEmail =  await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
@@ -62,6 +63,7 @@ class UserController{
 
         user.name = name ?? user.name;  //se não existir conteúdo no name então deixe o mesmo nome de antes, para evitar que o valor seja nulo
         user.email = email ?? user.email;
+
 
         if(password && !old_password){
             throw new AppError("Você precisa informar a senha antiga para definir a nova senha");
