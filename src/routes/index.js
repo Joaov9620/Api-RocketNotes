@@ -9,7 +9,7 @@ const tagsRoutes = require("./tags.routes")
 //o routes contem todas as rotas da nossa aplicação
 const routes = Router();
 
-//toda vez que alguem acessar o '/users' vai ser redicionado para userRoutes que é o grupo de rotas do usuário
+//toda vez que alguem acessar o '/users' vai ser redirecionado para userRoutes que é o grupo de rotas do usuário
 routes.use("/users", usersRoutes)
 
 routes.use("/notes", notesRoutes)
