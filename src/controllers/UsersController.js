@@ -63,8 +63,6 @@ class UserController{
         user.name = name ?? user.name;  //se não existir conteúdo no name então deixe o mesmo nome de antes, para evitar que o valor seja nulo
         user.email = email ?? user.email;
 
-        console.log(name, email)
-
         if(password && !old_password){
             throw new AppError("Você precisa informar a senha antiga para definir a nova senha");
         }
