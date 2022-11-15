@@ -43,11 +43,10 @@ class UserController{
     async update(request, response){
         const { name, email, password, old_password } = request.body;  //desistruturando, para pegar o nome e email
 
-        const {id} = request.params; //pegando o id
-
+        const user_id = request.user.id;
         const database = await sqliteConnection();
 
-        const user = await database.get("SELECT * FROM users WHERE id = (?)", [id]); //pegando o usuário pelo id
+        const user = await database.get("SELECT * FROM users WHERE id = (?)", [user_id]); //pegando o usuário pelo id
         //se o usuário não for encontrado
         if(!user){
             throw new AppError("Usuário não encontrado")
@@ -87,7 +86,7 @@ class UserController{
             password = ?,
             updated_at = DATETIME('now')
             WHERE id = ?`,
-            [user.name, user.email, user.password, id]
+            [user.name, user.email, user.password, user_id]
         )
         //datetime = gera a data atual pelo própio banco
 

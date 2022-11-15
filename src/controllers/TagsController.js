@@ -3,7 +3,7 @@ const knex = require('../database/knex');
 class TagsController{
     //responsável por listar todas as tagas cadastrada do usuário
     async index(request, response){
-        const { user_id } = request.params;
+        const  user_id  = request.user.id;
 
         //buscando tags
         const tags = await knex("tags")
