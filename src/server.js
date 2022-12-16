@@ -1,14 +1,13 @@
 //importando a biblioteca de erros
 require("express-async-errors");
-
 //importando o banco de dados
 const migrationsRun = require("./database/sqlite/migrations")
-
 //importando o AppErro
 const AppError= require("./utils/AppError");
+const uploadConfig = require("./configs/upload");
 
+const cors = require("cors");
 const express = require('express'); //importamos o express
-
 //importando o arquivo responsavel pelo grupo de rotas, 
 const routes = require("./routes") //  /routes =  quando não colocamos o nome do arquivo ele procura o arquivo chamado index
 
@@ -20,6 +19,8 @@ const app = express();  //inicializamos o express
 
 //qual padrão que vai utilizar quando receber essas informações, no caso Json
 app.use(express.json());
+
+app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER));
 
 
 //use essas rotas
