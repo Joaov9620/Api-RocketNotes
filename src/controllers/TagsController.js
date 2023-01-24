@@ -9,6 +9,8 @@ class TagsController{
         const tags = await knex("tags")
         //user_id = por ter nomes iguais ele entende que >  user_id: user_id
         .where({ user_id })
+        .groupBy("name")
+        //groupBy = agrupa pelo campo e não traz repetidos
         
         response.json(tags);
     }

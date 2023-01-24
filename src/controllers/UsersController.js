@@ -17,6 +17,7 @@ class UserController{
 
 
     async create(request, response){
+        
         const { name, email, password } = request.body;
 
         const database = await sqliteConnection(); //conectando o banco
@@ -26,7 +27,7 @@ class UserController{
         const checkUsersExists  = await database.get("SELECT * FROM users WHERE email = (?)" , [email]) //verificar se o email já existe
 
         if(checkUsersExists){
-            throw new AppError("Este e-mail já está em uso.")
+            throw new AppError("Este e-mail já está em uso.") 
         }
 
         const hashedPassword = await hash(password, 8) //criptografando a senha

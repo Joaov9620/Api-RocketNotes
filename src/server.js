@@ -16,6 +16,7 @@ migrationsRun(); //executando o migrations
 
 //inicializando o express para utilizar ele
 const app = express();  //inicializamos o express
+app.use(cors());
 
 //qual padrão que vai utilizar quando receber essas informações, no caso Json
 app.use(express.json());

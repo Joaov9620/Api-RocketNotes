@@ -7,7 +7,7 @@ class NotesController{
         const user_id = request.user.id;
 
         //iserir a nota e recuperando o id da nota cadastrada 
-        const note_id =  await knex("notes").insert({
+        const [note_id] =  await knex("notes").insert({
             title,
             description,
             user_id
@@ -86,6 +86,7 @@ class NotesController{
             .whereLike("notes.title", `%${title}%`)
             .whereIn("name", filterTags)   //analisa baseado na tag e passa o vetor que quer que compare se a tag existe
             .innerJoin("notes","notes.id","tags.note_id")
+            .groupBy("notes.id")
             .orderBy("notes.title");
         }else{
             notes = await knex("notes")
