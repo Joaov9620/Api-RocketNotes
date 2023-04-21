@@ -6,7 +6,6 @@ const {sign} = require('jsonwebtoken');
 
 //rota de autenticação
 class SessionsController {
-
     async create(request, response){
         const {email, password} = request.body;
         

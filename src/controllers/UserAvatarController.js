@@ -21,6 +21,8 @@ class UserAvatarController{
             await diskStorage.deleteFile(user.avatar);
         }
 
+
+
         const filename = await diskStorage.saveFile(avatarFileName);
         user.avatar = filename;
 
