@@ -1,3 +1,5 @@
+require('dotenv/config');
+
 //importando a biblioteca de erros
 require("express-async-errors");
 //importando o banco de dados
@@ -51,7 +53,7 @@ app.use((error, request, response, next) =>{
 
 
 //em que porta ele vai ficar observando
-const PORT = 3333;      //porta em que a api vai ficar esperando requisições e devolvendo essas respostas
+const PORT = process.env.SERVER_PORT  || 3333;      //porta em que a api vai ficar esperando requisições e devolvendo essas respostas
 
 
 //listen =  ficar escutando. PORT = nesta porta. '( ) =>' = e quando iniciar executar essa função

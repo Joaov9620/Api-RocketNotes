@@ -13,7 +13,7 @@ function ensureAuthenticated(request, response, next){
 
     try{
         //verifica se é um token válido, o sub passa a ser chamado de user_id
-       const { sub: user_id } = verify(token, authConfig.jwt.secret);
+       const { sub: user_id } = verify(token, authConfig.jwt.expiresIn);
  
        //pega o id do usuario no token e insere na requisição
        request.user = {

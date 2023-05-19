@@ -1,7 +1,6 @@
 //salvar o arquivo no disco
 
 const fs = require("fs"); //para lidar com manipulação de arquivos
-const { diskStorage } = require("multer");
 const path = require("path"); //lidar com os diretórios
 const uploadConfig = require("../configs/upload");
 
